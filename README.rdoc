@@ -1,25 +1,21 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
-<HEAD>
-	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
-	<TITLE></TITLE>
-	<META NAME="GENERATOR" CONTENT="LibreOffice 3.5  (Linux)">
-	<META NAME="CREATED" CONTENT="0;0">
-	<META NAME="CHANGEDBY" CONTENT="Artem ">
-	<META NAME="CHANGED" CONTENT="20130409;2031900">
-	<STYLE TYPE="text/css">
-	<!--
-		@page { size: 21cm 29.7cm; margin-left: 2cm; margin-right: 1cm; margin-top: 1cm; margin-bottom: 1cm }
-		P { margin-bottom: 0.21cm }
-		TT.western { font-family: "Droid Sans Mono", monospace }
-		TT.cjk { font-family: "WenQuanYi Micro Hei", monospace }
-		TT.ctl { font-family: "Lohit Hindi", monospace }
-	-->
-	</STYLE>
-</HEAD>
-<BODY LANG="ru-RU" LINK="#000080" VLINK="#800000" DIR="LTR">
-<P STYLE="margin-bottom: 0cm">Тестовое задание новости</P>
-<P STYLE="margin-bottom: 0cm"><BR>
-</P>
-</BODY>
-</HTML>
+Тестовое задание новости для работы в казани.
+Задание было такое:
+Разработать простую новостную систему. Реализовать добавление, просмотр, редактирование и удаление новостей. 
+Реализовать систему авторизации (без регистрации, авторизация 
+по email/password, возможность выйти из системы). Реализовать систему рейтинга новостей, AJAX-голосование за новости.
+
+Детали:
+
+    На главной странице должны выводиться новости, отсортированные по рейтингу и дате добавления.
+
+    Добавление новостей доступно только авторизованным пользователям.
+
+    Авторизованные пользователи должны иметь возможность просмотреть список своих новостей.
+
+    Голосовать за одну новость можно только один раз.
+
+    Все новости доступны для просмотра и голосования всем пользователям.
+
+    Редактирование и удаление доступно только создавшим новость.
+
+    Страница с текстом новости должна содержать дату создания, email пользователя, заголовок, текст.
