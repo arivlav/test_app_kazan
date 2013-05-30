@@ -1,0 +1,26 @@
+h1 News
+br
+
+-if current_user
+  = link_to "Show only my articles", "articles/"+session[:user_id].to_s+"/my_articles"
+= link_to "Show all", articles_path
+
+br
+
+- @articles.each do |article|
+  div
+    h4 = article.title
+    article = article.content
+    p <b> Author: </b> #{article.user.email} (created_at: #{article.created_at.day}.#{article.created_at.month}.#{article.created_at.year})
+    -if current_user && UserArticles.where(:articles_id => article.id, :user_id => session[:user_id]).count == 0
+      p <b> Rating: </b><span id="#{article.id}">#{article.rating}</span> #{link_to "(Vote)", "/articles/index/"+session[:user_id].to_s+"/"+article.id.to_s, {:remote => true, :id => "vote"+article.id.to_s}}
+    -else
+      p <b> Rating: </b><span id="#{article.id}">#{article.rating}</span>
+
+    -if current_user && current_user = article.user_id
+      p #{link_to 'Edit', edit_article_path(article)} #{link_to 'Destroy', article, :confirm => 'Are you sure?', :method => :delete}
+    br
+    br
+br
+
+= link_to 'New Article', new_article_path
