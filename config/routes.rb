@@ -1,10 +1,13 @@
 News::Application.routes.draw do
-  resources :articles
+  resources :articles do
+    member do
+      get '/vote'=>"articles#vote"
+       get '/my_articles'=>"articles#my_articles"
+    end
+  end
   resources :user_sessions
   #resources :users
 
-  get '/articles/index/:user_id/:articles_id'=>"articles#index"
-  get '/articles/:user_id/my_articles/'=>"articles#my_articles"
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
 

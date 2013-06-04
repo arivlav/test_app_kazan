@@ -1,8 +1,7 @@
 h1 News
 br
-
 -if current_user
-  = link_to "Show only my articles", "articles/"+session[:user_id]+"/my_articles"
+  = link_to "Show only my articles", my_articles_article_path(0)
 = link_to "Show all", articles_path
 
 br
@@ -13,7 +12,7 @@ br
     article = article.content
     p <b> Author: </b> #{article.user.email} (created_at: #{article.created_at.day}.#{article.created_at.month}.#{article.created_at.year})
     -if current_user && UserArticles.where(:articles_id => article.id, :user_id => session[:user_id]).count == 0
-      p <b> Rating: </b><span id="#{article.id}">#{article.rating}</span> #{link_to "(Vote)", "/articles/index/"+session[:user_id].to_s+"/"+article.id.to_s, {:remote => true, :id => "vote"+article.id.to_s}}
+      p <b> Rating: </b><span id="#{article.id}">#{article.rating}</span> #{link_to "(Vote)", vote_article_path(article), {:remote=>true, :id => "vote"+article.id.to_s, :update => article.id.to_s}}
     -else
       p <b> Rating: </b><span id="#{article.id}">#{article.rating}</span>
 

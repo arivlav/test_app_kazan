@@ -4,25 +4,15 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    if params[:articles_id] && params[:user_id] && UserArticles.where(:articles_id=>params[:articles_id], :user_id=>params[:user_id]).count==0
-      UserArticles.create(:articles_id=>params[:articles_id], :user_id=>params[:user_id])
-      @articles=Article.find(params[:articles_id])
-      @articles.update_attributes(:rating => @articles.rating + 1)
-    end
-
     @articles = Article.all
-
     respond_to do |format|
       format.html # index.html.erb
-      format.js do
-        render :js => "$('#vote#{params[:articles_id]}').css('visibility', 'hidden');$('##{params[:articles_id]}').html(parseInt($('##{params[:articles_id]}').html())+1);"
-        end
       format.json { render json: @articles }
     end
   end
 
   def my_articles
-    @articles = Article.where(:user_id =>params[:user_id])
+    @articles = Article.where(:user_id =>current_user.id)
     render :index
   end
   # GET /articles/1
@@ -98,5 +88,18 @@ class ArticlesController < ApplicationController
 
   def check_my_article
     format.html { redirect_to :article, notice: "Not allowed." } unless params[:user_id]=session[:user_id]
+  end
+
+  def vote
+    if current_user && UserArticles.where(:articles_id=>params[:id], :user_id=>current_user.id).count==0
+      UserArticles.create(:articles_id=>params[:id], :user_id=>current_user.id)
+      @articles=Article.find(params[:id])
+      @articles.update_attributes(:rating => @articles.rating + 1)
+    end
+    respond_to do |format|
+      format.js do
+        render :js => "$('#vote#{params[:id]}').css('visibility', 'hidden');$('##{params[:id]}').html(parseInt($('##{params[:id]}').html())+1);"
+      end
+    end
   end
 end
